@@ -29,6 +29,9 @@ RUN apk add --no-cache \
   php84-xmlwriter \
   supervisor
 
+RUN mkdir -p /run/php && chown nobody:nobody /run/php
+ENV PATH="/usr/bin:${PATH}"
+
 # Configure nginx - http
 COPY config/nginx.conf /etc/nginx/nginx.conf
 # Configure nginx - default server
