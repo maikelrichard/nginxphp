@@ -29,6 +29,8 @@ RUN apk add --no-cache \
   php84-xmlwriter \
   supervisor
 
+RUN chmod 755 /run
+
 RUN mkdir -p /run/php && chown nobody:nobody /run/php
 ENV PATH="/usr/bin:${PATH}"
 
@@ -44,6 +46,9 @@ COPY config/php.ini ${PHP_INI_DIR}/conf.d/custom.ini
 
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN mkdir -p /run/php-fpm && \
+RUN chown -R nobody:nobody /run/php-fpm /run /var/log/nginx /var/lib/nginx
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/nginx
