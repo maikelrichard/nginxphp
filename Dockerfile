@@ -32,6 +32,7 @@ RUN apk add --no-cache \
 RUN chmod 755 /run
 
 RUN mkdir -p /run/php && chown nobody:nobody /run/php
+
 ENV PATH="/usr/bin:${PATH}"
 
 # Configure nginx - http
